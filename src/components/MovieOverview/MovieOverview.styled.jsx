@@ -11,7 +11,7 @@ export const TextWrapper = styled.div`
 `;
 
 export const ImgWrapper = styled.img`
-  width: 700px;
+  width: 701px;
 `;
 
 export const StyledLink = styled(NavLink)`
