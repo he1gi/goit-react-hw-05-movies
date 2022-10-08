@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { Img } from './TradingMovies.styled';
@@ -21,3 +22,13 @@ export default function TrandingMovies({ movies }) {
     );
   });
 }
+
+TrandingMovies.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      poster_path: PropTypes.string,
+    })
+  ),
+};

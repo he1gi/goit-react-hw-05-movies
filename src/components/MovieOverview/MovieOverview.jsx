@@ -1,4 +1,5 @@
-import { Outlet } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import {
   Wrapper,
   TextWrapper,
@@ -35,7 +36,18 @@ export default function MovieOverview({ details }) {
             })}
         </TextWrapper>
       </Wrapper>
-      <Outlet />
     </>
   );
 }
+
+MovieOverview.propTypes = {
+  cast: PropTypes.arrayOf(
+    PropTypes.shape({
+      vote_average: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      overview: PropTypes.string,
+      poster_path: PropTypes.none,
+      ganres: PropTypes.none,
+    })
+  ),
+};

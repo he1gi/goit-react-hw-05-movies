@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Img } from './CastOverview.styled';
 
 import notFound from '../../images/404/404-page.jpg';
@@ -6,7 +7,7 @@ export default function CastOverview({ cast }) {
   return cast.map(
     ({ id, name, character = 'No information', profile_path }) => {
       return (
-        <li key={id}>
+        <li key={`${character}+${id}`}>
           <Img
             src={
               profile_path
@@ -24,3 +25,14 @@ export default function CastOverview({ cast }) {
     }
   );
 }
+
+CastOverview.propTypes = {
+  cast: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string,
+      character: PropTypes.string,
+      poster_path: PropTypes.string,
+    })
+  ),
+};

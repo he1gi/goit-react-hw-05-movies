@@ -1,5 +1,5 @@
 import { getTranding } from 'api/api';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
 import TrandingMovies from 'components/TrandingMovies';
@@ -32,12 +32,14 @@ export default function Home() {
 
   return (
     <>
-      <ToastContainer />
-      {isLoading && <Loader />}
-      <h1>Trending films</h1>
-      <List>
-        <TrandingMovies movies={movies} />
-      </List>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ToastContainer />
+        {isLoading && <Loader />}
+        <h1>Trending films</h1>
+        <List>
+          <TrandingMovies movies={movies} />
+        </List>
+      </Suspense>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -26,13 +26,15 @@ export default function Reviews() {
 
   return (
     <>
-      <ToastContainer />
-      <h2>Additional Information</h2>
-      {reviews.length !== 0 ? (
-        <ReviewInfo reviews={reviews} />
-      ) : (
-        <h1>No information about Reviews</h1>
-      )}
+      <Suspense fallback={<div>Loading...</div>}>
+        <ToastContainer />
+        <h2>Additional Information</h2>
+        {reviews.length !== 0 ? (
+          <ReviewInfo reviews={reviews} />
+        ) : (
+          <h1>No information about Reviews</h1>
+        )}
+      </Suspense>
     </>
   );
 }

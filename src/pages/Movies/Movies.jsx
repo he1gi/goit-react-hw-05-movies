@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -48,26 +48,28 @@ export default function Movie() {
     <>
       <ToastContainer />
       <SeachBox value={query} onChange={changeFilter} />
-      {query && (
-        <List>
-          {chosenMovie.map(({ title, id, poster_path }) => (
-            <li key={id}>
-              <Link to={`${id}`}>
-                <div>
-                  <Img
-                    src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                    alt={title}
-                  />
-                </div>
-                <div>
-                  <h2>{title}</h2>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </List>
-      )}
-      {isLoading && <Loader />}
+      <Suspense fallback={<div>Loading...</div>}>
+        {query && (
+          <List>
+            {chosenMovie.map(({ title, id, poster_path }) => (
+              <li key={id}>
+                <Link to={`${id}`}>
+                  <div>
+                    <Img
+                      src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                      alt={title}
+                    />
+                  </div>
+                  <div>
+                    <h2>{title}</h2>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </List>
+        )}
+        {isLoading && <Loader />}
+      </Suspense>
     </>
   );
 }

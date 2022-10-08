@@ -1,5 +1,5 @@
-// import { Outlet } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import { useState, useEffect, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieDetails } from 'api/api';
 
@@ -13,5 +13,12 @@ export default function MovieDetails() {
     getMovieDetails(movieId).then(setDetails);
   }, [movieId]);
 
-  return <div>{details && <MovieOverview details={details} />}</div>;
+  return (
+    <div>
+      {details && <MovieOverview details={details} />}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
+    </div>
+  );
 }

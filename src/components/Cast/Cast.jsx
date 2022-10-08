@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -32,7 +32,9 @@ export default function Cast() {
       <ToastContainer />
       <h2>Additional Information</h2>
       <List>
-        <CastOverview cast={cast} />
+        <Suspense fallback={<div>Loading page...</div>}>
+          <CastOverview cast={cast} />
+        </Suspense>
       </List>
     </>
   );

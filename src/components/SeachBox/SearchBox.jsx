@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { Input, InputWrapper } from './SearchBox.styled';
 
 export default function SeacrhBox({ value, onChange }) {
@@ -11,3 +13,8 @@ export default function SeacrhBox({ value, onChange }) {
     </InputWrapper>
   );
 }
+
+SeacrhBox.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
