@@ -8,16 +8,19 @@ import { List, Img } from '../pages.styled';
 
 import Loader from 'components/Loader';
 
+const KEY = 'query';
+
 export default function Movie() {
   const [movie, setMovie] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const query = searchParams.get('query') ?? '';
+  const query = searchParams.get('query') ?? window.localStorage.getItem(KEY);
 
   useEffect(() => {
     if (query) {
+      window.localStorage.setItem(KEY, query);
       setIsLoading(true);
 
       searchMovie(query)
@@ -35,7 +38,7 @@ export default function Movie() {
   }, [query, error]);
 
   const changeFilter = value => {
-    setSearchParams(value !== '' ? { query: value } : {});
+    setSearchParams({ query: value });
   };
 
   const chosenMovie = useMemo(() => {

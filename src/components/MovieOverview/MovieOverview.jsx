@@ -22,7 +22,8 @@ export default function MovieOverview({ details }) {
           />
         </div>
         <TextWrapper>
-          <StyledLink to="/">Go back</StyledLink>
+          {/* <StyledLink to="/">Go back</StyledLink> */}
+          <StyledLink to="/movies">Go back</StyledLink>
           <StyledLink to="cast">Cast</StyledLink>
           <StyledLink to="reviews">Reviews</StyledLink>
           <h1>{title || 'No information'}</h1>
