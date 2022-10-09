@@ -19,8 +19,11 @@ export default function Movie() {
   const query = searchParams.get('query') ?? window.localStorage.getItem(KEY);
 
   useEffect(() => {
+    window.localStorage.setItem(KEY, '');
+
     if (query) {
       window.localStorage.setItem(KEY, query);
+
       setIsLoading(true);
 
       searchMovie(query)
